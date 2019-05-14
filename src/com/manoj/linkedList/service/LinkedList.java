@@ -190,4 +190,32 @@ public class LinkedList<T> {
            System.out.print(cur.getData()+"\t");
        }
     }
+
+    public void reverseListIterative(){
+        if(head!=null){
+            Node current = head;
+            Node prev = null;
+            while (current!=null){
+                Node next = current.getNext();
+                current.setNext(prev);
+                prev = current;
+                current = next;
+            }
+            head = prev;
+        }
+    }
+
+    public Node<T> reverseListRecusrsive(Node current,Node prev){
+        if(current.getNext()==null){
+            current.setNext(prev);
+            head = current;
+            return head;
+        }else {
+            Node next = current.getNext();
+            current.setNext(prev);
+            reverseListRecusrsive(next,current);
+            return head;
+
+        }
+    }
 }

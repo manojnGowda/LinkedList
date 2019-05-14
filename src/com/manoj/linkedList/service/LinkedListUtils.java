@@ -120,5 +120,26 @@ public class LinkedListUtils<T> {
         return false;
     }
 
+    /*
+        Insert in the sorted order
+     */
+    public Node<Integer> insertNodeSorted(Node<Integer> head,Integer data){
+        Node<Integer> newNode = new Node(data);
+        if(head==null){
+            head = newNode;
+            return head;
+        }else {
+            Node<Integer> current = head;
+            Node prev = null;
+            while (current!=null && current.getData()<data){
+                prev = current;
+                current = current.getNext();
+            }
+            newNode.setNext(current);
+            prev.setNext(newNode);
+            return head;
+        }
+    }
+
 
 }
