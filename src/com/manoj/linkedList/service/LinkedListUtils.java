@@ -141,5 +141,65 @@ public class LinkedListUtils<T> {
         }
     }
 
+    /**
+     * Check the list is even or odd
+     *
+     * @param head
+     * @param <T>
+     * @return
+     */
+    public static <T> boolean isEvenList(Node<T> head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast!=null && fast.getNext()!=null){
+            fast = fast.getNext().getNext();
+            slow = slow.getNext();
+        }
+
+        if ( fast ==null )
+            return true;
+        else
+            return false;
+    }
+
+    public static Node mergerSortedList(Node<Integer> p,Node<Integer> q){
+        if ( p==null )
+            return q;
+        if ( q==null )
+            return p;
+        Node<Integer> head = new Node();
+        Node<Integer> cur = head;
+        while (q!=null&&p!=null){
+            if ( p.getData() <q.getData()){
+                cur.setNext(p);
+                cur = p;
+                p = p.getNext();
+            }else {
+                cur.setNext(q);
+                cur=q;
+                q = q.getNext();
+            }
+
+        }
+        if ( q!=null ){
+            cur.setNext(q);
+        }
+        if ( p!=null ){
+            cur.setNext(p);
+        }
+        return head.getNext();
+    }
+
+    public static void traverseByHead(Node head){
+        Node temp = head;
+        System.out.println("=====================");
+        while (temp!=null){
+            System.out.print(temp.getData()+"\t");
+            temp = temp.getNext();
+        }
+        System.out.println("\n=====================");
+    }
+
 
 }
