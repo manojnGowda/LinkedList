@@ -3,6 +3,7 @@ package com.manoj.linkedList.service;
 import com.manoj.linkedList.Dto.Node;
 
 import java.util.HashSet;
+import java.util.Stack;
 
 public class LinkedListUtils<T> {
 
@@ -163,6 +164,25 @@ public class LinkedListUtils<T> {
             return false;
     }
 
+
+    public static Node mergerSortedListRecursive(Node<Integer> p,Node<Integer> q){
+
+        if(p==null)
+            return q;
+        if ( q==null )
+            return p;
+        Node head = new Node();
+        if(p.getData()<q.getData()){
+            head = p;
+            head.setNext(mergerSortedListRecursive(p.getNext(),q));
+        }else {
+            head = q;
+            head.setNext(mergerSortedListRecursive(p,q.getNext()));
+        }
+        return head;
+    }
+
+
     public static Node mergerSortedList(Node<Integer> p,Node<Integer> q){
         if ( p==null )
             return q;
@@ -201,5 +221,26 @@ public class LinkedListUtils<T> {
         System.out.println("\n=====================");
     }
 
+    public static  boolean isPalindrome(Node<Integer> head){
+        Node<Integer> slow=head;
+        boolean ispalin=true;
+        Stack<Integer> stack=new Stack<Integer>();
 
+        while(slow != null){
+            stack.push(slow.getData());
+            slow=slow.getNext();
+
+        }
+        while(head != null){
+            int i=stack.pop();
+            if(head.getData() == i){
+                ispalin=true;
+            }
+            else{
+                ispalin=false;break;
+            }
+            head=head.getNext();
+        }
+        return ispalin;
+    }
 }
